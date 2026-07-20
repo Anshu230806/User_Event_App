@@ -4,7 +4,8 @@ import android.accessibilityservice.GestureDescription
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import  java.util.Date
-import java.sql.Time
+import java.sql.Time 
+
 
 // use COIL ( coroutine image loader )  for image   ( make sure internet permissions are given to the app)
 //?  Indicates the variable can explicitly accept a null value.
@@ -19,8 +20,8 @@ data class EventEntity(
     var eventImageURL: String?,
     var eventDescription: String,
 
-    var eventDate: Date,
-    var eventTime: Time,
+    var eventDate: Long,
+    var eventTime: Long,
     val eventDuration: Long,
 
     var eventVenue: String,
@@ -34,6 +35,6 @@ data class EventEntity(
 
     val clubId:String,
     val organiserId: Int,
-    val categoryId: Int
+    val categoryId: String
 
 )
