@@ -7,11 +7,13 @@ import com.example.eventsapp.EventScreens.ONBOARDING_SCREEN
 
 private object EventScreens {
     const val ONBOARDING_SCREEN = "start_screen"
+    
 }
 
 
 object EventDestinations {
     const val ONBOARDING_ROUTE = ONBOARDING_SCREEN
+
 }
 
 
@@ -25,5 +27,14 @@ class EventNavigationActions(private val navController: NavHostController) {
             launchSingleTop = true
             restoreState = true
         }
+    }
+
+    fun navigateToLogin(){
+
+    }
+
+
+    fun navigateToSignUP(){
+
     }
 }
