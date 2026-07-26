@@ -56,7 +56,6 @@ fun onBoarding(
 
             Spacer( modifier = Modifier.height(170.dp))
 
-
             Text(
                 text = "Discover",
                 color = Color.White,

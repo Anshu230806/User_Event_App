@@ -34,12 +34,22 @@ suspend fun getAllEvents(): List<EventEntity>
 //Room automatically matches the function parameter name id with the SQL placeholder :id at compile time.
 //When you call observeById("123"), Room takes the value "123" and safely injects it into the SQL query where :taskId is located.
 // This prevents SQL injection attacks.
+
 @Query("select * from events where eventId = :id")
 fun observeEventById(id: Int): Flow<EventEntity>
 
 @Query("select * from events where eventId = :id")
 suspend fun getEventById(id: Int) : EventEntity?
 
+
+@Query("select * from events where clubId = :id")
+fun getClubEvents(id: String): Flow<List<EventEntity>>
+
+@Query("select * from events where categoryId = :id)
+fun getCategotyEvents(id: String): Flow<List<EventEntity>>
+
+@Query("select * from events where eventTitle Like '%' || :query || '%' "  )
+fun searchEvents(query: String): Flow<List<EventEntity>>
 
 
 
