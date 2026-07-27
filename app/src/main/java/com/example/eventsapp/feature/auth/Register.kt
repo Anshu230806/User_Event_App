@@ -32,9 +32,13 @@ val TextDark = Color(0xFF1A1A1A)
 val TextHint = Color(0xFF9E9E9E)
 val BorderColor = Color(0xFFE0E0E0)
 
-@OptIn(ExperimentalMaterial3Api::class)
+//@OptIn(ExperimentalMaterial3Api::class)
+
+
 @Composable
-fun SignupPage() {
+fun Register(
+    onLoginClick: () -> Unit = {}
+) {
     var fullName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -260,11 +264,7 @@ Row(modifier = Modifier.weight(1f).height(48.dp).border(1.dp,
     Text(text = "G ", color = Color.Red, fontWeight = FontWeight.Bold)
     Text(text = "Google", color = TextDark, fontSize = 14.sp, fontWeight = FontWeight.Medium)
 }
-    // Facebook Sign In
-    Row(modifier = Modifier.weight(1f).height(48.dp).border(1.dp, BorderColor, RoundedCornerShape(12.dp)).clickable { /* Facebook Auth */ },horizontalArrangement = Arrangement.Center,verticalAlignment = Alignment.CenterVertically) {
-        Text(text = "f ", color = Color(0xFF1877F2), fontWeight = FontWeight.Bold)
-        Text(text = "Facebook", color = TextDark, fontSize = 14.sp, fontWeight = FontWeight.Medium)
-    }
+
 }
 
 // Extra spacing at the bottom to prevent layout overlap while scrollingSpacer(modifier = Modifier.height(100.dp))}
@@ -279,7 +279,7 @@ Text(
     fontSize = 14.sp,
     fontWeight = FontWeight.Bold,
     modifier = Modifier.
-               clickable { /* Navigate back to Login Page */ }
+               clickable { onLoginClick() }
 )
 }
   }
@@ -292,6 +292,6 @@ Text(
 @Composable
 fun signUpPreview(){
     EventsAppTheme{
-        SignupPage()
+        Register()
     }
 }
