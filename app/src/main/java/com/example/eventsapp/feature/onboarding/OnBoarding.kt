@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -30,14 +31,14 @@ import com.example.eventsapp.feature.theme.EventsAppTheme
 
 
 @Composable
-fun onBoarding(
+fun OnBoarding(
     modifier: Modifier = Modifier,
     onGetStartedClick: () -> Unit = {},
     onLoginClick: () -> Unit = {}
 ) {
 
     Box(
-        modifier = modifier
+        modifier = modifier.fillMaxSize()
     ){
         Image(
             painter = painterResource(R.drawable.starting_page),
@@ -47,14 +48,13 @@ fun onBoarding(
         )
 
         Column(
-
             modifier = Modifier
                 .fillMaxSize()
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ){
 
-            Spacer( modifier = Modifier.height(170.dp))
+            Spacer( modifier = Modifier.height(100.dp))
 
             Text(
                 text = "Discover",
@@ -64,15 +64,12 @@ fun onBoarding(
 
             )
 
-
-
             Text(
                 text = "Connect",
                 color = Color.White,
                 fontSize = 30.sp,
                 fontWeight= FontWeight.Bold
             )
-
 
             Text(
                 text = "Participate",
@@ -81,7 +78,6 @@ fun onBoarding(
                 fontWeight = FontWeight.Bold
             )
 
-
             Spacer(modifier = Modifier.height(15.dp))
 
             Text(
@@ -89,15 +85,12 @@ fun onBoarding(
                 color = Color.White,
                 fontSize = 18.sp,
                 textAlign =  TextAlign.Center
-
             )
 
-
-            Spacer(modifier = Modifier.height(320.dp))
+            Spacer(modifier = Modifier.weight(1f))
 
             Button(
-                modifier = Modifier.width(400.dp).height(43.dp),
-
+                modifier = Modifier.fillMaxWidth().height(48.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF541A8A)),
                 onClick = onGetStartedClick,
                 shape = RoundedCornerShape(12.dp),
@@ -109,17 +102,13 @@ fun onBoarding(
                 )
             }
 
-
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(16.dp))
             OutlinedButton(
-                modifier = Modifier.width(400.dp).height(43.dp),
-
+                modifier = Modifier.fillMaxWidth().height(48.dp),
                 colors = ButtonDefaults.outlinedButtonColors( containerColor = Color.Black , contentColor =Color.White),
                 onClick = onLoginClick,
-
                 shape = RoundedCornerShape(12.dp),
                 border = BorderStroke(1.dp,Color.White)
-
             ){
                 Text(
                     text ="Login",
@@ -128,11 +117,9 @@ fun onBoarding(
                 )
             }
 
-
-            Spacer(modifier = Modifier.height(40.dp))
+            Spacer(modifier = Modifier.height(24.dp))
         }
     }
-
 }
 
 
@@ -141,6 +128,6 @@ fun onBoarding(
 @Composable
 fun OnBoardingPreview() {
     EventsAppTheme {
-        onBoarding()
+        OnBoarding()
     }
 }

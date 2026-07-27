@@ -36,24 +36,18 @@ suspend fun getAllEvents(): List<EventEntity>
 // This prevents SQL injection attacks.
 
 @Query("select * from events where eventId = :id")
-fun observeEventById(id: Int): Flow<EventEntity>
+fun observeEventById(id: String): Flow<EventEntity>
 
 @Query("select * from events where eventId = :id")
-suspend fun getEventById(id: Int) : EventEntity?
-
+suspend fun getEventById(id: String): EventEntity?
 
 @Query("select * from events where clubId = :id")
 fun getClubEvents(id: String): Flow<List<EventEntity>>
 
-@Query("select * from events where categoryId = :id)
-fun getCategotyEvents(id: String): Flow<List<EventEntity>>
+@Query("select * from events where categoryId = :id")
+fun getCategoryEvents(id: String): Flow<List<EventEntity>>
 
-@Query("select * from events where eventTitle Like '%' || :query || '%' "  )
+@Query("select * from events where eventTitle Like '%' || :query || '%' " )
 fun searchEvents(query: String): Flow<List<EventEntity>>
-
-
-
-
-
 
 }

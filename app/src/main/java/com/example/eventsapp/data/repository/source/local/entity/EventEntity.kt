@@ -15,7 +15,7 @@ import java.sql.Time
 @Entity(tableName = "events")
 data class EventEntity(
 
-    @PrimaryKey(autoGenerate = true) val eventId: String ,
+    @PrimaryKey val eventId: String,
     var eventTitle: String,
     var eventImageURL: String?,
     var eventDescription: String,
@@ -28,12 +28,12 @@ data class EventEntity(
     var eventAddress: String,
 
     var eventEligiblity: String,
-    var eventLikes: Int=0,
+    var eventLikes: Int = 0,
 
     var isPaid: Boolean,
     var price: Int = 0,
 
-    val clubId:String,
+    val clubId: String,
     val organiserId: Int,
     val categoryId: String
 

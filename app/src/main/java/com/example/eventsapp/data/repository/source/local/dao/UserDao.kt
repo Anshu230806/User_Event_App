@@ -8,10 +8,10 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface UserDao {
 
-@Query("select * from users where userId = :id")
-fun observeProfile(id: Int): Flow<UserEntity>
+@Query("select * from Users where userId = :id")
+fun observeProfile(id: String): Flow<UserEntity>
 
-@Query("select * from users where userId= :id")
-suspend fun getProfile(id : Int): UserEntity?
+@Query("select * from Users where userId = :id")
+suspend fun getProfile(id: String): UserEntity?
 
 }

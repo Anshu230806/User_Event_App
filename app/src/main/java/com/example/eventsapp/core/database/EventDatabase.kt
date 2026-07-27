@@ -12,10 +12,11 @@ import com.example.eventsapp.data.repository.source.local.entity.UserEntity
 // @Database represents that it is the roomDatabase , entities represent all tables,
 // and version means the current version of schema  if schema is changed then this number incremented ,
 
-@Database( entities = [  EventEntity:: class, UserEntity::class ] ,
-           version = 1,
-           exportSchema = false
-         )
+@Database(
+    entities = [EventEntity::class, UserEntity::class],
+    version = 1,
+    exportSchema = false
+)
 
 // this class must be abstract bcz . Room will automatically generate the underlying implementation for you at compile time.
 // @Database. It then automatically creates a generated subclass (e.g., AppDatabase_Impl) that writes all the complex, repetitive SQLite boilerplates needed to handle your data.

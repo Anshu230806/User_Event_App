@@ -1,14 +1,10 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
-
-//    id("com.android.application")
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlin.serialization)
+    id("com.google.dagger.hilt.android")
     id("com.google.gms.google-services")
-
-    // for room database
-    id("com.google.devtools.ksp")
-//    id("org.jetbrains.kotlin.android")
-
 }
 
 android {
@@ -41,11 +37,12 @@ android {
     buildFeatures {
         compose = true
     }
+}
 
-//    kotlinOptions {
-//        jvmTarget = '1.8'
-//    }
-
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
+    }
 }
 
 dependencies {
@@ -59,6 +56,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.kotlinx.serialization.json)
 
     // icons dependency
     implementation("androidx.compose.material:material-icons-extended:1.7.8")
@@ -70,6 +68,7 @@ dependencies {
 
     // roomdatabase
     val room_version = "2.8.4"
+
 
     implementation("androidx.room:room-runtime:$room_version")
 
@@ -86,7 +85,6 @@ dependencies {
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.5.0")
 //    implementation(libs.coil.compose)
 
-
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
@@ -94,7 +92,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
-
-
-
+    implementation("com.google.dagger:hilt-android:2.60.1")
+    ksp("com.google.dagger:hilt-android-compiler:2.60.1")
 }

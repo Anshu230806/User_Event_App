@@ -1,37 +1,4 @@
-//package com.example.eventsapp.ui.auth
-//
-//import androidx.compose.foundation.layout.Box
-//import androidx.compose.foundation.layout.Column
-//import androidx.compose.foundation.layout.fillMaxSize
-//import androidx.compose.foundation.layout.padding
-//import androidx.compose.material3.CenterAlignedTopAppBar
-//import androidx.compose.material3.Icon
-//import androidx.compose.material3.IconButton
-//import androidx.compose.material3.Scaffold
-//import androidx.compose.material3.Text
-//import androidx.compose.runtime.Composable
-//import androidx.compose.ui.Modifier
-//import androidx.compose.ui.tooling.preview.Preview
-//import com.example.eventsapp.ui.theme.EventsAppTheme
-//
-//@Composable
-//fun Login(
-//    modifier: Modifier = Modifier
-//){
-////    Box(
-////        modifier = modifier
-////    ){
-////
-////        Column(
-////             modifier = modifier.fillMaxSize()
-////        ){
-////
-////
-////        }
-//
-//}
-
-
+package com.example.eventsapp.feature.auth
 
 
 import androidx.compose.foundation.background
@@ -64,9 +31,16 @@ import com.example.eventsapp.feature.theme.TextHint
 // Color Palette Based on Image
 
 
-@OptIn(ExperimentalMaterial3Api::class)
+//@OptIn(ExperimentalMaterial3Api::class)
+
+
 @Composable
-fun LoginPage() {
+fun Login(
+    modifier:Modifier = Modifier,
+    onSignUpClick : () -> Unit= {},
+    onForgetPassClick: ()-> Unit= {},
+    onLoginClick:() -> Unit= {}
+) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -213,7 +187,7 @@ fun LoginPage() {
 
             // Main Login Button
             Button(
-                onClick = { /* Handle Login action */ },
+                onClick = onLoginClick,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(52.dp),
@@ -267,18 +241,7 @@ fun LoginPage() {
                 }
 
                 // Facebook Sign In Button
-                Row(
-                    modifier = Modifier
-                        .weight(1f)
-                        .height(48.dp)
-                        .border(1.dp, BorderColor, RoundedCornerShape(12.dp))
-                        .clickable { /* Facebook Auth */ },
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(text = "f ", color = Color(0xFF1877F2), fontWeight = FontWeight.Bold) // Substitute for FB logo vector
-                    Text(text = "Facebook", color = TextDark, fontSize = 14.sp, fontWeight = FontWeight.Medium)
-                }
+
             }
         }
 
@@ -296,7 +259,7 @@ fun LoginPage() {
                     color = PurpleMain,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.clickable { /* Navigate to Sign Up Page */ }
+                    modifier = Modifier.clickable { onSignUpClick() }
                 )
             }
         }
@@ -308,6 +271,6 @@ fun LoginPage() {
 @Composable
 fun LoginPreview(){
     EventsAppTheme() {
-        LoginPage()
+        Login()
     }
 }
