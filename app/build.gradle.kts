@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.navigation.runtime.ktx)
+//    implementation(libs.firebase.auth.ktx)
     implementation(libs.kotlinx.serialization.json)
 
     // icons dependency
@@ -63,12 +64,13 @@ dependencies {
 
     // firebase
     implementation(platform("com.google.firebase:firebase-bom:34.16.0"))
+    implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-analytics")
 
 
     // roomdatabase
     val room_version = "2.8.4"
-
+    val lifecycle_version = "2.11.0"
 
     implementation("androidx.room:room-runtime:$room_version")
 
@@ -84,6 +86,18 @@ dependencies {
     implementation("io.coil-kt.coil3:coil-compose:3.5.0")
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.5.0")
 //    implementation(libs.coil.compose)
+
+    // viewModel dependency
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:${lifecycle_version}")
+    // for collectAsStateLifecycle
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:${lifecycle_version}")
+
+    // for kotlin coroutine  ( await())
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.11.0")
+
+    // hilt dependencies
+    implementation("androidx.hilt:hilt-navigation-compose:1.4.0")
+
 
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))

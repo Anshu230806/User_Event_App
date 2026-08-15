@@ -1,6 +1,7 @@
 package com.example.eventsapp.feature.auth
 
-
+import android.R.attr.onClick
+import android.R.attr.password
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -21,29 +22,70 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.eventsapp.feature.theme.BorderColor
 import com.example.eventsapp.feature.theme.EventsAppTheme
 import com.example.eventsapp.feature.theme.GrayBackground
 import com.example.eventsapp.feature.theme.PurpleMain
 import com.example.eventsapp.feature.theme.TextDark
 import com.example.eventsapp.feature.theme.TextHint
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.collectAsState
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 
 // Color Palette Based on Image
-
-
 //@OptIn(ExperimentalMaterial3Api::class)
+
+@Composable
+fun LoginRoute(
+    onLoginSuccess:()-> Unit={},
+    onForgetPassClick: () -> Unit={},
+    onSignUpClick: () -> Unit={},
+    loginViewModel: LoginViewModel= hiltViewModel()
+){
+    // val loginUiState by loginViewModel.uiState.collectAsState()
+    val loginUiState by loginViewModel.uiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(loginUiState.effect) {
+
+        when (val effect = loginUiState.effect) {
+
+            LoginUiEffect.navigateToHome -> {
+                onLoginSuccess()
+
+                loginViewModel.consumeEffect()
+            }
+
+            null -> Unit
+        }
+    }
+//    var email by remember { mutableStateOf("") }
+//    var password by remember { mutableStateOf("") }
+
+    Login(
+        loginUiState= loginUiState,
+        onEmailChange= loginViewModel::onEmailChange,
+        onPasswordChange= loginViewModel::onPasswordChange,
+        onLoginClick= loginViewModel::login,
+        onSignUpClick= onSignUpClick ,
+        onForgetPassClick= onForgetPassClick
+    )
+}
 
 
 @Composable
 fun Login(
     modifier:Modifier = Modifier,
-    onSignUpClick : () -> Unit= {},
-    onForgetPassClick: ()-> Unit= {},
-    onLoginClick:() -> Unit= {}
+    loginUiState: LoginUiState,
+    onEmailChange: (String)->Unit,
+    onPasswordChange: (String)->Unit,
+    onLoginClick:()->Unit,
+    onSignUpClick: () -> Unit,
+    onForgetPassClick: () -> Unit
 ) {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -72,6 +114,7 @@ fun Login(
                     )
                 }
             }
+
 
 
 
@@ -121,8 +164,8 @@ fun Login(
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 OutlinedTextField(
-                    value = email,
-                    onValueChange = { email = it },
+                    value = loginUiState.email,
+                    onValueChange = {onEmailChange(it) },
                     placeholder = { Text("Enter your email", color = TextHint) },
                     leadingIcon = {
                         Icon(imageVector = Icons.Default.Email, contentDescription = "Email Icon", tint = TextHint)
@@ -148,8 +191,8 @@ fun Login(
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 OutlinedTextField(
-                    value = password,
-                    onValueChange = { password = it },
+                    value = loginUiState.password,
+                    onValueChange = { onPasswordChange(it) },
                     placeholder = { Text("Enter your password", color = TextHint) },
                     leadingIcon = {
                         Icon(imageVector = Icons.Default.Lock, contentDescription = "Lock Icon", tint = TextHint)
@@ -179,27 +222,45 @@ fun Login(
                     color = PurpleMain,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier.clickable { /* Handle Forgot Password click */ }
+                    modifier = Modifier.clickable(onClick = onForgetPassClick )
                 )
             }
 
             Spacer(modifier = Modifier.height(28.dp))
 
+            if (loginUiState.errorMessage != null) {
+                Text(
+                    text = loginUiState.errorMessage,
+                    color = Color.Red,
+                    fontSize = 14.sp,
+                    modifier = Modifier.padding(bottom = 16.dp)
+                )
+            }
+
             // Main Login Button
             Button(
-                onClick = onLoginClick,
+                onClick = {onLoginClick()} ,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(52.dp),
                 shape = RoundedCornerShape(12.dp),
+                enabled = !loginUiState.isLoading,
                 colors = ButtonDefaults.buttonColors(containerColor = PurpleMain)
             ) {
-                Text(
-                    text = "Login",
-                    color = Color.White,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold
-                )
+                if (loginUiState.isLoading) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(24.dp),
+                        color = Color.White,
+                        strokeWidth = 2.dp
+                    )
+                } else {
+                    Text(
+                        text = "Login",
+                        color = Color.White,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
             }
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -271,6 +332,16 @@ fun Login(
 @Composable
 fun LoginPreview(){
     EventsAppTheme() {
-        Login()
+        Login(
+        loginUiState= LoginUiState(
+            email="test@email.com",
+            password="test123"
+        ),
+        onEmailChange= {},
+        onPasswordChange= {},
+        onLoginClick= {},
+        onSignUpClick= {},
+        onForgetPassClick= {}
+        )
     }
 }

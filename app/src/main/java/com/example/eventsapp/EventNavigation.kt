@@ -23,6 +23,10 @@ public object LOGIN_ROUTE
 public object SIGNUP_ROUTE
 @Serializable
 public object FORGOTPASS_ROUTE
+
+@Serializable
+public object HOME_ROUTE
+
 class EventNavigationActions(private val navController: NavHostController) {
 
     fun navigateToOnboarding() {
@@ -55,5 +59,25 @@ class EventNavigationActions(private val navController: NavHostController) {
             restoreState = true
         }
 
+    }
+
+    fun navigateToForgetPassword(){
+        navController.navigate(FORGOTPASS_ROUTE) {
+            popUpTo(navController.graph.findStartDestination().id) {
+                saveState = true
+            }
+            launchSingleTop = true
+            restoreState = true
+        }
+    }
+
+    fun navigateToHome(){
+        navController.navigate(HOME_ROUTE) {
+            popUpTo(navController.graph.findStartDestination().id) {
+                saveState = true
+            }
+            launchSingleTop = true
+            restoreState = true
+        }
     }
 }

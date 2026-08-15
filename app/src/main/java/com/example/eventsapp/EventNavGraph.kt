@@ -9,9 +9,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.eventsapp.feature.onboarding.OnBoarding
 import com.example.eventsapp.feature.auth.Login
+import com.example.eventsapp.feature.auth.LoginRoute
 import com.example.eventsapp.feature.auth.Register
-
-
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import com.example.eventsapp.feature.auth.RegisterRoute
+import com.example.eventsapp.feature.home.Home
+import androidx.compose.material3.Text
 
 @Composable
 fun EventNavGraph(
@@ -27,6 +31,7 @@ fun EventNavGraph(
         startDestination = startDestination,
         modifier = modifier
     ) {
+
         composable<ONBOARDING_ROUTE> {
             OnBoarding(
                 onGetStartedClick = {
@@ -42,7 +47,13 @@ fun EventNavGraph(
         }
 
         composable<LOGIN_ROUTE>{
-            Login(
+            LoginRoute(
+                onLoginSuccess = {
+                    navActions.navigateToHome()
+                },
+                onForgetPassClick = {
+                    navActions.navigateToForgetPassword()
+                },
                 onSignUpClick = {
                     navActions.navigateToSignUp()
                 }
@@ -50,11 +61,29 @@ fun EventNavGraph(
         }
 
         composable<SIGNUP_ROUTE>{
-            Register(
+            RegisterRoute(
                 onLoginClick = {
                     navActions.navigateToLogin()
+                },
+                onSignUpSuccess = {
+                    navActions.navigateToHome()
+                },
+                onForgetPassClick = {
+                    navActions.navigateToForgetPassword()
                 }
             )
         }
+
+        composable<HOME_ROUTE> {
+            Home()
+        }
+
     }
 }
+
+
+//
+//@Composable
+//fun LoginRoute(onSignUpClick: () -> Unit) {
+//    TODO("Not yet implemented")
+//}

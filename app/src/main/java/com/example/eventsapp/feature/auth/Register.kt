@@ -1,5 +1,6 @@
 package com.example.eventsapp.feature.auth
 
+import android.R.attr.password
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -23,6 +24,8 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.eventsapp.feature.theme.EventsAppTheme
 
 // Color Palette (Consistent with Login Page)
@@ -36,13 +39,58 @@ val BorderColor = Color(0xFFE0E0E0)
 
 
 @Composable
+fun RegisterRoute(
+    onLoginClick: ()->Unit,
+    onSignUpSuccess: ()->Unit,
+    onForgetPassClick: ()->Unit,
+    registerViewModel: RegisterViewModel= hiltViewModel()
+){
+    val registerUiState by registerViewModel.uiState.collectAsStateWithLifecycle()
+
+
+    LaunchedEffect(registerUiState.effect) {
+
+        when (val effect = registerUiState.effect) {
+
+            RegisterUiEffect.navigateToHome -> {
+                onSignUpSuccess()
+
+                registerViewModel.consumeEffect()
+            }
+
+            null -> Unit
+        }
+    }
+
+    Register(
+        registerUiState= registerUiState,
+        onLoginClick = onLoginClick,
+        onSignUpClick = registerViewModel::signUp,
+        onForgetPassClick = onForgetPassClick,
+        onEmailChange = registerViewModel::onEmailChange,
+        onPasswordChange = registerViewModel::onPasswordChange,
+        onConfirmPassChange = registerViewModel::onConfirmPassChange
+    )
+}
+
+@Composable
 fun Register(
-    onLoginClick: () -> Unit = {}
+    mofifier: Modifier= Modifier,
+    registerUiState: RegisterUiState,
+    onLoginClick: () -> Unit ,
+    onSignUpClick: () -> Unit,
+    onForgetPassClick: () -> Unit,
+    onEmailChange:(String)->Unit,
+    onPasswordChange:(String)->Unit,
+    onConfirmPassChange:(String)->Unit,
+
 ) {
-    var fullName by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var confirmPassword by remember { mutableStateOf("") }
+
+    // we used seperate  RegisterUiState
+//    var fullName by remember { mutableStateOf("") }
+//    var email by remember { mutableStateOf("") }
+//    var password by remember { mutableStateOf("") }
+//    var confirmPassword by remember { mutableStateOf("") }
 
     Box(
         modifier = Modifier
@@ -68,7 +116,7 @@ fun Register(
                 IconButton(
                     onClick = { /* Handle Back navigation click action */ },
                     modifier = Modifier.size(40.dp)
-                ) {
+                ){
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Back Arrow",
@@ -112,8 +160,8 @@ fun Register(
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 OutlinedTextField(
-                    value = fullName,
-                    onValueChange = { fullName = it },
+                    value ="FULL NAME",
+                    onValueChange = { },
                     placeholder = { Text("Enter your full name", color = TextHint) },
                     leadingIcon = {
                         Icon(imageVector = Icons.Default.Person, contentDescription = "User Icon", tint = TextHint)
@@ -138,8 +186,8 @@ fun Register(
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 OutlinedTextField(
-                    value = email,
-                    onValueChange = { email = it },
+                    value = registerUiState.email,
+                    onValueChange = { onEmailChange(it)},
                     placeholder = { Text("Enter your email", color = TextHint) },
                     leadingIcon = {
                         Icon(imageVector = Icons.Default.Email, contentDescription = "Email Icon", tint = TextHint)
@@ -165,8 +213,8 @@ fun Register(
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 OutlinedTextField(
-                    value = password,
-                    onValueChange = { password = it },
+                    value = registerUiState.password,
+                    onValueChange = { onPasswordChange(it) },
                     placeholder = { Text("Create a password", color = TextHint) },
                     leadingIcon = {
                         Icon(imageVector = Icons.Default.Lock, contentDescription = "Lock Icon", tint = TextHint)
@@ -196,8 +244,8 @@ fun Register(
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 OutlinedTextField(
-                    value = confirmPassword,
-                    onValueChange = { confirmPassword = it },
+                    value = registerUiState.confirmPass,
+                    onValueChange = {onConfirmPassChange(it)},
                     placeholder = { Text("Repeat your password", color = TextHint) },
                     leadingIcon = {
                         Icon(imageVector = Icons.Default.Lock, contentDescription = "Lock Icon", tint = TextHint)
@@ -217,21 +265,39 @@ fun Register(
 
             Spacer(modifier = Modifier.height(32.dp))
 
+            if (registerUiState.errorMessage != null) {
+                Text(
+                    text = registerUiState.errorMessage,
+                    color = Color.Red,
+                    fontSize = 14.sp,
+                    modifier = Modifier.padding(bottom = 16.dp)
+                )
+            }
+
             // Main Signup Button
             Button(
-                onClick = { /* Handle Signup action */ },
+                onClick = { onSignUpClick()},
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(52.dp),
+                enabled = !registerUiState.isLoading,
                 shape = RoundedCornerShape(12.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = PurpleMain)
             ) {
-                Text(
-                    text = "Sign Up",
-                    color = Color.White,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold
-                )
+                if (registerUiState.isLoading) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(24.dp),
+                        color = Color.White,
+                        strokeWidth = 2.dp
+                    )
+                } else {
+                    Text(
+                        text = "Sign Up",
+                        color = Color.White,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
             }
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -292,6 +358,14 @@ Text(
 @Composable
 fun signUpPreview(){
     EventsAppTheme{
-        Register()
+        Register(
+            registerUiState= RegisterUiState(),
+            onLoginClick = {},
+            onSignUpClick ={},
+            onForgetPassClick = {},
+            onEmailChange = {},
+            onPasswordChange ={},
+            onConfirmPassChange = {}
+        )
     }
 }
