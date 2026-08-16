@@ -84,9 +84,7 @@ This architecture provides
 
 ## UI
 
-- XML
-- RecyclerView
-- Material Components
+- Jetpack Compose
 
 ## Architecture
 
