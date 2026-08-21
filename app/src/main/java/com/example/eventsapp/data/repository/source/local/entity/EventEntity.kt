@@ -21,7 +21,7 @@ data class EventEntity(
     var eventDescription: String,
 
     var eventDate: Long,
-    var eventTime: Long,
+    val eventStartTime: Long,
     val eventDuration: Long,
 
     var eventVenue: String,
@@ -34,7 +34,9 @@ data class EventEntity(
     var price: Int = 0,
 
     val clubId: String,
-    val organiserId: Int,
-    val categoryId: String
-
+    val organiserId: String,
+    val categoryId: String,
+    val registrationLink: String? = null,
 )
+
+

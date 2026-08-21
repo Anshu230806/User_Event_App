@@ -66,7 +66,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:34.16.0"))
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-analytics")
-
+    implementation("com.google.firebase:firebase-firestore")
 
     // roomdatabase
     val room_version = "2.8.4"
@@ -98,6 +98,8 @@ dependencies {
     // hilt dependencies
     implementation("androidx.hilt:hilt-navigation-compose:1.4.0")
 
+    //material3 dependencies
+    implementation("androidx.compose.material3:material3:1.4.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))

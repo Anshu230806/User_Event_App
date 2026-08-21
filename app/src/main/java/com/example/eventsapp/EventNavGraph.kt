@@ -14,7 +14,7 @@ import com.example.eventsapp.feature.auth.Register
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import com.example.eventsapp.feature.auth.RegisterRoute
-import com.example.eventsapp.feature.home.Home
+import com.example.eventsapp.feature.home.EventRoute
 import androidx.compose.material3.Text
 
 @Composable
@@ -75,7 +75,26 @@ fun EventNavGraph(
         }
 
         composable<HOME_ROUTE> {
-            Home()
+            EventRoute(
+                onEventClick = { eventId ->
+                    // TODO: Navigate to Event Details
+                },
+               onHomeClick = {
+
+               },
+            onMyEventsClick = {
+
+            },
+            onClubsClick = {
+
+            },
+            onOppurtunitiesClick = {
+                    // TODO: Navigate to Add Event
+                },
+                onProfileClick = {
+                    // TODO: Navigate to Profile
+                }
+            )
         }
 
     }
@@ -85,5 +104,5 @@ fun EventNavGraph(
 //
 //@Composable
 //fun LoginRoute(onSignUpClick: () -> Unit) {
-//    TODO("Not yet implemented")
+//
 //}

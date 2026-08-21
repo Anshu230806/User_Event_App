@@ -8,7 +8,6 @@ class FirebaseAuthRepository @Inject constructor(
 ): AuthRepository {
 
     override suspend fun login(email: String  ,password: String): Result<Unit>{
-
         return try{
             firebaseAuth.signInWithEmailAndPassword(email,password).await()
             Result.success(Unit)

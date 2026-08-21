@@ -14,7 +14,7 @@ import com.example.eventsapp.data.repository.source.local.entity.UserEntity
 
 @Database(
     entities = [EventEntity::class, UserEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 

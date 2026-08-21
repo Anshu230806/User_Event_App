@@ -49,6 +49,7 @@ fun LoginRoute(
     // val loginUiState by loginViewModel.uiState.collectAsState()
     val loginUiState by loginViewModel.uiState.collectAsStateWithLifecycle()
 
+    // LaunchedEffect called whenever the value of the  loginUiState.effect  changes  then based on its value some task is performed
     LaunchedEffect(loginUiState.effect) {
 
         when (val effect = loginUiState.effect) {

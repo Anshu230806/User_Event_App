@@ -39,7 +39,6 @@ class LoginViewModel @Inject constructor(
     }
 
     fun login() {
-
         val currentState = _uiState.value
 
         if (currentState.email.isBlank()) {
