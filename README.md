@@ -1,18 +1,18 @@
-# 🎉 EventHub – College Event Management Platform
+EventHub – College Event Management Platform
 
 EventHub is a modern Android application designed to simplify college event management by connecting students and event organizers on a single platform.
 
 The project consists of **two Android applications** sharing the same Firebase backend:
 
-- 📱 **EventHub** – Student Application
-- 🛠 **EventHub Organizer** – Organizer Application
+ **EventHub** – Student Application
+**EventHub Organizer** – Organizer Application
 
 Students can discover, register for, and receive notifications about college events, while organizers can create and manage events in real time.
 
 ---
 
-currently working on this project not completed 
-
+currently working on this project not completed  , some features are ready 
+ 
 # ✨ Features
 
 ## 👨‍🎓 Student App
@@ -84,9 +84,7 @@ This architecture provides
 
 ## UI
 
-- XML
-- RecyclerView
-- Material Components
+- Jetpack Compose
 
 ## Architecture
 
@@ -192,14 +190,6 @@ EventHub/
 
 ---
 
-# 📸 Screenshots
-
-| Student App | Organizer App |
-|--------------|---------------|
-| Add screenshots here | Add screenshots here |
-
----
-
 # 🔮 Future Improvements
 
 - QR Code based attendance
@@ -207,7 +197,6 @@ EventHub/
 - Event Analytics Dashboard
 - AI Event Recommendation
 - Dark Mode
-- Offline Support using Room
 - Admin Web Dashboard
 
 ---
