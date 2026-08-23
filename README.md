@@ -2,37 +2,32 @@ EventHub – College Event Management Platform
 
 EventHub is a modern Android application designed to simplify college event management by connecting students and event organizers on a single platform.
 
-The project consists of **two Android applications** sharing the same Firebase backend:
+The project consists of **Android applications** sharing the same Firebase backend:
 
  **EventHub** – Student Application
 **EventHub Organizer** – Organizer Application
 
-Students can discover, register for, and receive notifications about college events, while organizers can create and manage events in real time.
+Students can discover, register for about college events, while organizers can create and manage events in real time.
 
 ---
 
 currently working on this project not completed  , some features are ready 
  
-# ✨ Features
+# Features
 
-## 👨‍🎓 Student App
+##  Student App
 
 - User Registration & Login
 - Secure Firebase Authentication
 - Browse Upcoming Events
-- Search Events
 - Filter Events
 - Event Details Screen
-- Register for Events
-- Save Favorite Events
-- View Registered Events
 - Real-time Event Updates
-- Push Notifications
 - Profile Management
 
 ---
 
-## 🏢 Organizer App
+## Organizer App
 
 - Organizer Authentication
 - Create Events
@@ -45,7 +40,7 @@ currently working on this project not completed  , some features are ready
 
 ---
 
-# 🏗 Architecture
+# Architecture
 
 The application follows Google's recommended **MVVM Architecture**.
 
@@ -70,13 +65,11 @@ Data Layer
 This architecture provides
 
 - Separation of Concerns
-- Easy Testing
-- Better Scalability
 - Maintainable Code
 
 ---
 
-# 🛠 Tech Stack
+# Tech Stack
 
 ## Language
 
@@ -96,7 +89,6 @@ This architecture provides
 - Firebase Authentication
 - Cloud Firestore
 - Firebase Storage
-- Firebase Cloud Messaging
 
 ## Libraries
 
@@ -107,7 +99,7 @@ This architecture provides
 
 ---
 
-# 📱 Screens
+# Screens
 
 ## Student Application
 
@@ -115,9 +107,6 @@ This architecture provides
 - Register
 - Home
 - Event Details
-- Search
-- Registered Events
-- Saved Events
 - Profile
 
 ---
@@ -133,7 +122,7 @@ This architecture provides
 
 ---
 
-# 🔐 Authentication
+#Authentication
 
 The project supports two user roles.
 
@@ -144,7 +133,7 @@ Role-based access ensures that only organizers can create, edit, or delete event
 
 ---
 
-# ☁ Firebase Services Used
+# Firebase Services Used
 
 - Firebase Authentication
 - Cloud Firestore
@@ -153,7 +142,7 @@ Role-based access ensures that only organizers can create, edit, or delete event
 
 ---
 
-# 📂 Project Structure
+# Project Structure
 
 ```
 EventHub/
@@ -170,28 +159,23 @@ EventHub/
 
 ---
 
-# 🚀 Key Functionalities
+#  Key Functionalities
 
 ✔ Real-time event synchronization
 
 ✔ Secure authentication
 
-✔ Event registration
+✔ Event Discovery
 
 ✔ Event poster upload
-
-✔ Search & Filtering
-
-✔ Push notifications
-
-✔ Role-based authorization
 
 ✔ Separate student & organizer applications
 
 ---
 
-# 🔮 Future Improvements
+#  Future Improvements
 
+- Role-based authorization
 - QR Code based attendance
 - Calendar Integration
 - Event Analytics Dashboard
