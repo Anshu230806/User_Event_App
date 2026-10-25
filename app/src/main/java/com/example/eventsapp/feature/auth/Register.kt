@@ -28,14 +28,12 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.eventsapp.feature.theme.EventsAppTheme
 
-// Color Palette (Consistent with Login Page)
 val PurpleMain = Color(0xFF6C24E3)
 val GrayBackground = Color(0xFFFAFAFA)
 val TextDark = Color(0xFF1A1A1A)
 val TextHint = Color(0xFF9E9E9E)
 val BorderColor = Color(0xFFE0E0E0)
 
-//@OptIn(ExperimentalMaterial3Api::class)
 
 
 @Composable
@@ -86,12 +84,6 @@ fun Register(
 
 ) {
 
-    // we used seperate  RegisterUiState
-//    var fullName by remember { mutableStateOf("") }
-//    var email by remember { mutableStateOf("") }
-//    var password by remember { mutableStateOf("") }
-//    var confirmPassword by remember { mutableStateOf("") }
-
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -101,33 +93,13 @@ fun Register(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                // Added scroll state because signup has more input fields
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // --- TOP NAVIGATION BAR WITH BACK ICON ---
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 40.dp),
-                horizontalArrangement = Arrangement.Start,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                IconButton(
-                    onClick = { /* Handle Back navigation click action */ },
-                    modifier = Modifier.size(40.dp)
-                ){
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Back Arrow",
-                        tint = TextDark
-                    )
-                }
-            }
+
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Heading Title
             Text(
                 text = "Create Account",
                 fontSize = 24.sp,
@@ -139,7 +111,6 @@ fun Register(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Subtitle text
             Text(
                 text = "Sign up to get started with Event Manager",
                 fontSize = 14.sp,
@@ -150,7 +121,6 @@ fun Register(
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // Full Name Input Field Section
             Column(modifier = Modifier.fillMaxWidth()) {
                 Text(
                     text = "Full Name",
@@ -160,7 +130,7 @@ fun Register(
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 OutlinedTextField(
-                    value ="FULL NAME",
+                    value ="",
                     onValueChange = { },
                     placeholder = { Text("Enter your full name", color = TextHint) },
                     leadingIcon = {
@@ -176,7 +146,6 @@ fun Register(
             }
 
 
-            // Email Input Field Section
             Column(modifier = Modifier.fillMaxWidth()) {
                 Text(
                     text = "Email",
@@ -201,9 +170,6 @@ fun Register(
                 )
             }
 
-
-
-            // Password Input Field Section
             Column(modifier = Modifier.fillMaxWidth()) {
                 Text(
                     text = "Password",
@@ -219,9 +185,6 @@ fun Register(
                     leadingIcon = {
                         Icon(imageVector = Icons.Default.Lock, contentDescription = "Lock Icon", tint = TextHint)
                     },
-                    trailingIcon = {
-                        Icon(imageVector = Icons.Default.VisibilityOff, contentDescription = "Toggle Visibility", tint = TextHint)
-                    },
                     visualTransformation = PasswordVisualTransformation(),
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp),
@@ -232,9 +195,6 @@ fun Register(
                 )
             }
 
-//            Spacer(modifier = Modifier.height(16.dp))
-
-            // Confirm Password Input Field Section
             Column(modifier = Modifier.fillMaxWidth()) {
                 Text(
                     text = "Confirm Password",
@@ -249,9 +209,6 @@ fun Register(
                     placeholder = { Text("Repeat your password", color = TextHint) },
                     leadingIcon = {
                         Icon(imageVector = Icons.Default.Lock, contentDescription = "Lock Icon", tint = TextHint)
-                    },
-                    trailingIcon = {
-                        Icon(imageVector = Icons.Default.VisibilityOff, contentDescription = "Toggle Visibility", tint = TextHint)
                     },
                     visualTransformation = PasswordVisualTransformation(),
                     modifier = Modifier.fillMaxWidth(),
@@ -274,7 +231,6 @@ fun Register(
                 )
             }
 
-            // Main Signup Button
             Button(
                 onClick = { onSignUpClick()},
                 modifier = Modifier
@@ -302,39 +258,7 @@ fun Register(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Divider Line: "or continue with"
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                HorizontalDivider(modifier = Modifier.weight(1f), color = BorderColor)
-                Text(
-                    text = "or continue with",
-                    color = TextHint,
-                    fontSize = 12.sp,
-                    modifier = Modifier.padding(horizontal = 16.dp)
-                )
-                HorizontalDivider(modifier = Modifier.weight(1f), color = BorderColor)
 
-            }
-            Spacer(modifier = Modifier.height(24.dp))
-
-// Social Buttons Row (Google & Facebook)
-Row(modifier = Modifier.fillMaxWidth(),horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-// Google Sign In
-Row(modifier = Modifier.weight(1f).height(48.dp).border(1.dp,
-    BorderColor,
-    RoundedCornerShape(12.dp)).clickable { /* Google Auth */ },
-    horizontalArrangement = Arrangement.Center,verticalAlignment = Alignment.CenterVertically)
-{
-    Text(text = "G ", color = Color.Red, fontWeight = FontWeight.Bold)
-    Text(text = "Google", color = TextDark, fontSize = 14.sp, fontWeight = FontWeight.Medium)
-}
-
-}
-
-// Extra spacing at the bottom to prevent layout overlap while scrollingSpacer(modifier = Modifier.height(100.dp))}
-// Bottom Login Redirection Text pinned to the bottom of the
   Box(modifier = Modifier.fillMaxSize().padding(bottom = 24.dp),contentAlignment = Alignment.BottomCenter) {
       Row {
           Text(text = "Already have an account? ", color = TextDark, fontSize = 14.sp)

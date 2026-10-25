@@ -163,14 +163,6 @@ fun EventCard(
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {
-//            AsyncImage(
-//                model = event.eventImageURL,
-//                contentDescription = event.eventTitle,
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .height(180.dp),
-//                contentScale = ContentScale.Crop
-//            )
 
             Column(
                 modifier = Modifier.padding(14.dp)
@@ -279,18 +271,6 @@ fun EventBottomNavigation(
     }
 }
 
-
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun EventScreenPreview() {
-//    EventsAppTheme {
-//        EventScreen(
-//            eventList = emptyList(),
-//            contentPadding = PaddingValues(16.dp)
-//        )
-//    }
-//}
 
 
 @Preview(

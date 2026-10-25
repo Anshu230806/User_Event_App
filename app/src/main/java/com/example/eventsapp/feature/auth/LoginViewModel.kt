@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 class LoginViewModel @Inject constructor(
  private val authRepository: AuthRepository
 ): ViewModel(){
-   private val _uiState = MutableStateFlow(LoginUiState())
+     private val _uiState = MutableStateFlow(LoginUiState())
     val uiState: StateFlow<LoginUiState> = _uiState.asStateFlow()
 
 

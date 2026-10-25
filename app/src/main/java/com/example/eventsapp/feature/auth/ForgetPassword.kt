@@ -19,16 +19,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.eventsapp.feature.theme.EventsAppTheme
 
-// Color Palette (Consistent with Login and Signup Pages)
-//val PurpleMain = Color(0xFF6C24E3)
-//val GrayBackground = Color(0xFFFAFAFA)
-//val TextDark = Color(0xFF1A1A1A)
-//val TextHint = Color(0xFF9E9E9E)
-//val BorderColor = Color(0xFFE0E0E0)
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ForgotPasswordPage() {
+
     var email by remember { mutableStateOf("") }
 
     Box(
@@ -41,41 +35,12 @@ fun ForgotPasswordPage() {
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // --- TOP NAVIGATION BAR WITH BACK ICON ---
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 40.dp), // Safe area margin
-                horizontalArrangement = Arrangement.Start,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                IconButton(
-                    onClick = { /* Handle Back navigation click action */ },
-                    modifier = Modifier.size(40.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Back Arrow",
-                        tint = TextDark
-                    )
-                }
-            }
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Top Illustration Placeholder
-//            Box(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .height(180.dp),
-//                contentAlignment = Alignment.Center
-//            ) {
-//                Text(text = "[ Forgot Password Illustration Placeholder ]", color = PurpleMain)
-//            }
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Heading Title
             Text(
                 text = "Forgot Password?",
                 fontSize = 24.sp,
@@ -87,7 +52,6 @@ fun ForgotPasswordPage() {
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Subtitle text instruction
             Text(
                 text = "Please enter the email address associated with your account.",
                 fontSize = 14.sp,
@@ -99,7 +63,6 @@ fun ForgotPasswordPage() {
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // Email Input Field Section
             Column(modifier = Modifier.fillMaxWidth()) {
                 Text(
                     text = "Email Address",
@@ -126,9 +89,8 @@ fun ForgotPasswordPage() {
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // Send Verification Code Button
             Button(
-                onClick = { /* Handle sending recovery link or OTP instruction */ },
+                onClick = { },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(52.dp),
@@ -144,7 +106,7 @@ fun ForgotPasswordPage() {
             }
         }
 
-        // Bottom navigation text pinned to the floor of the screen
+
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -158,7 +120,7 @@ fun ForgotPasswordPage() {
                     color = PurpleMain,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.clickable { /* Navigate back to Login Screen */ }
+                    modifier = Modifier.clickable {}
                 )
             }
         }

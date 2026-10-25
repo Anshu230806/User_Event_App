@@ -35,12 +35,9 @@ fun EventNavGraph(
         composable<ONBOARDING_ROUTE> {
             OnBoarding(
                 onGetStartedClick = {
-                    // For now, it stays on onboarding or we could add a destination later
-                    // navActions.navigateTo...
                     navActions.navigateToSignUp()
                 },
                 onLoginClick = {
-                    // navActions.navigateTo...
                     navActions.navigateToLogin()
                 }
             )
@@ -77,7 +74,6 @@ fun EventNavGraph(
         composable<HOME_ROUTE> {
             EventRoute(
                 onEventClick = { eventId ->
-                    // TODO: Navigate to Event Details
                 },
                onHomeClick = {
 
@@ -89,10 +85,10 @@ fun EventNavGraph(
 
             },
             onOppurtunitiesClick = {
-                    // TODO: Navigate to Add Event
+
                 },
                 onProfileClick = {
-                    // TODO: Navigate to Profile
+
                 }
             )
         }
@@ -101,8 +97,3 @@ fun EventNavGraph(
 }
 
 
-//
-//@Composable
-//fun LoginRoute(onSignUpClick: () -> Unit) {
-//
-//}

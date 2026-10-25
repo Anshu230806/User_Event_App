@@ -36,8 +36,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 
-// Color Palette Based on Image
-//@OptIn(ExperimentalMaterial3Api::class)
 
 @Composable
 fun LoginRoute(
@@ -63,8 +61,6 @@ fun LoginRoute(
             null -> Unit
         }
     }
-//    var email by remember { mutableStateOf("") }
-//    var password by remember { mutableStateOf("") }
 
     Login(
         loginUiState= loginUiState,
@@ -97,46 +93,9 @@ fun Login(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 40.dp), // Adjust padding based on status bar height
-                horizontalArrangement = Arrangement.Start,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                IconButton(
-                    onClick = { /* Handle Back navigation click action */ },
-                    modifier = Modifier.size(40.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Back Arrow",
-                        tint = TextDark
-                    )
-                }
-            }
-
-
-
-
-            // Top Illustration Placeholder
-            // Replace R.drawable.login_illustration with your actual vector/image resource
-//            Box(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .height(130.dp),
-//                contentAlignment = Alignment.Center
-//            ) {
-//                // If you have the image resource:
-//                // Image(painter = painterResource(id = R.drawable.login_illustration), contentDescription = "Login Illustration")
-//
-//                // Temporary visual placeholder for illustration
-//                Text(text = "[ Illustration Placeholder ]", color = PurpleMain)
-//            }
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Heading Title
             Text(
                 text = "Welcome Back!",
                 fontSize = 24.sp,
@@ -146,7 +105,6 @@ fun Login(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Subtitle text
             Text(
                 text = "Login to continue to Event Manager",
                 fontSize = 14.sp,
@@ -155,7 +113,6 @@ fun Login(
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // Email Input Field Section
             Column(modifier = Modifier.fillMaxWidth()) {
                 Text(
                     text = "Email",
@@ -182,7 +139,6 @@ fun Login(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Password Input Field Section
             Column(modifier = Modifier.fillMaxWidth()) {
                 Text(
                     text = "Password",
@@ -198,9 +154,6 @@ fun Login(
                     leadingIcon = {
                         Icon(imageVector = Icons.Default.Lock, contentDescription = "Lock Icon", tint = TextHint)
                     },
-                    trailingIcon = {
-                        Icon(imageVector = Icons.Default.VisibilityOff, contentDescription = "Toggle Visibility", tint = TextHint)
-                    },
                     visualTransformation = PasswordVisualTransformation(),
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp),
@@ -212,8 +165,6 @@ fun Login(
             }
 
             Spacer(modifier = Modifier.height(12.dp))
-
-            // Forgot Password Link
             Box(
                 modifier = Modifier.fillMaxWidth(),
                 contentAlignment = Alignment.CenterEnd
@@ -238,7 +189,6 @@ fun Login(
                 )
             }
 
-            // Main Login Button
             Button(
                 onClick = {onLoginClick()} ,
                 modifier = Modifier
@@ -266,48 +216,14 @@ fun Login(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Divider Line: "or continue with"
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                HorizontalDivider(modifier = Modifier.weight(1f), color = BorderColor)
-                Text(
-                    text = "or continue with",
-                    color = TextHint,
-                    fontSize = 12.sp,
-                    modifier = Modifier.padding(horizontal = 16.dp)
-                )
-                HorizontalDivider(modifier = Modifier.weight(1f), color = BorderColor)
-            }
+
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Social Buttons Row (Google & Facebook)
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                // Google Sign In Button
-                Row(
-                    modifier = Modifier
-                        .weight(1f)
-                        .height(48.dp)
-                        .border(1.dp, BorderColor, RoundedCornerShape(12.dp))
-                        .clickable { /* Google Auth */ },
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(text = "G ", color = Color.Red, fontWeight = FontWeight.Bold) // Substitute for Google logo vector
-                    Text(text = "Google", color = TextDark, fontSize = 14.sp, fontWeight = FontWeight.Medium)
-                }
 
-                // Facebook Sign In Button
-
-            }
         }
 
-        // Bottom Sign Up Redirection Text pinned to the bottom of the Screen
+        
         Box(
             modifier = Modifier
                 .fillMaxSize()

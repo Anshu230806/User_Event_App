@@ -36,6 +36,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -101,6 +102,19 @@ dependencies {
     //material3 dependencies
     implementation("androidx.compose.material3:material3:1.4.0")
 
+    // retrofit dependencies
+    // Retrofit: defines and executes REST API calls.
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+
+// Gson: converts backend JSON into Kotlin DTOs.
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+
+// OkHttp: HTTP client used by Retrofit.
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
+// Network request logging for debug builds only.
+    debugImplementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
@@ -109,5 +123,9 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation("com.google.dagger:hilt-android:2.60.1")
-    ksp("com.google.dagger:hilt-android-compiler:2.60.1")
+//    ksp("com.google.dagger:hilt-android-compiler:2.60.1")
+// Runs Hilt's compiler through KSP to generate dependency-injection code.
+    ksp("com.google.dagger:hilt-compiler:2.60.1")
+
+
 }

@@ -5,7 +5,7 @@ import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class EventAplication: Application(){
-    // You can leave this completely empty unless you need to initialize other libraries
+    // we can leave this completely empty unless you need to initialize other libraries
    // made bcz to initialize the hilt
 
 }

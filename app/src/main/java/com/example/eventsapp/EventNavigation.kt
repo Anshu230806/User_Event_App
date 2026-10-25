@@ -27,6 +27,7 @@ public object FORGOTPASS_ROUTE
 @Serializable
 public object HOME_ROUTE
 
+
 class EventNavigationActions(private val navController: NavHostController) {
 
     fun navigateToOnboarding() {

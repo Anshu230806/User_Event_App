@@ -33,8 +33,8 @@ import com.example.eventsapp.feature.theme.EventsAppTheme
 @Composable
 fun OnBoarding(
     modifier: Modifier = Modifier,
-    onGetStartedClick: () -> Unit = {},
-    onLoginClick: () -> Unit = {}
+    onGetStartedClick: () -> Unit ,
+    onLoginClick: () -> Unit
 ) {
 
     Box(
@@ -61,7 +61,6 @@ fun OnBoarding(
                 color = Color.White,
                 fontSize = 30.sp,
                 fontWeight = FontWeight.Bold
-
             )
 
             Text(
@@ -128,6 +127,9 @@ fun OnBoarding(
 @Composable
 fun OnBoardingPreview() {
     EventsAppTheme {
-        OnBoarding()
+        OnBoarding(
+                onGetStartedClick = {},
+                onLoginClick = {}
+        )
     }
 }
