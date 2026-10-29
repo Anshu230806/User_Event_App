@@ -246,7 +246,7 @@ fun EventBottomNavigation(
         )
         NavigationBarItem(
             selected = false,
-            onClick = onOppurtunitiesClick,
+            onClick = onMyEventsClick,
             icon = { Icon(Icons.Default.Explore, contentDescription = "Oppurtunities") },
             label = { Text("Events") }
         )
@@ -254,13 +254,13 @@ fun EventBottomNavigation(
             selected = false,
             onClick = onClubsClick,
             icon = { Icon(Icons.Default.Groups, contentDescription = "Clubs") },
-            label = { Text("Add") }
+            label = { Text("Clubs") }
         )
         NavigationBarItem(
             selected = false,
-            onClick = onMyEventsClick,
+            onClick = onOppurtunitiesClick,
             icon = { Icon(Icons.Default.EventAvailable, contentDescription = "MyEvents") },
-            label = { Text("Profile") }
+            label = { Text("Oppurtunitie") }
         )
         NavigationBarItem(
             selected = false,

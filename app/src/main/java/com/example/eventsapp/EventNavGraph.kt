@@ -17,6 +17,7 @@ import com.example.eventsapp.feature.home.EventRoute
 import androidx.compose.material3.Text
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.toRoute
+import com.example.eventsapp.feature.auth.ForgotPasswordPage
 import com.example.eventsapp.feature.clubs.ClubsRoute
 import com.example.eventsapp.feature.eventFilterScreen.EventFilterRoute
 import com.example.eventsapp.feature.eventdetail.EventDetailRoute
@@ -82,7 +83,7 @@ fun EventNavGraph(
             EventRoute(
                 onEventClick = navActions::navigateToEventDetail,
                 onHomeClick = { },
-                onMyEventsClick = navActions::navigateToProfile,
+                onMyEventsClick = navActions::navigateToEventFilter,
                 onClubsClick = navActions::navigateToClubs,
                 onOppurtunitiesClick = navActions::navigateToOpportunities,
                 onProfileClick = navActions::navigateToProfile
@@ -90,7 +91,11 @@ fun EventNavGraph(
         }
 
         composable<FORGOTPASS_ROUTE> {
-            Text("Use the existing password reset screen from your auth feature.")
+            ForgotPasswordPage(
+                onLoginClick = {
+                    navController.popBackStack()
+                }
+            )
         }
         composable<EVENT_FILTER_ROUTE> {
             EventFilterRoute(
