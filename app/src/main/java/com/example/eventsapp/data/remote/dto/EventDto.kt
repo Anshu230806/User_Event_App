@@ -2,7 +2,8 @@ package com.example.eventsapp.data.remote.dto
 
 data class EventsResponseDto(
     val success: Boolean,
-    val data: EventsDataDto
+    val data: EventsDataDto,
+    val pagination: PaginationDto
 )
 
 data class EventsDataDto(
@@ -20,5 +21,14 @@ data class EventDto(
     val eligibility: String? = null,
     val likesCount: Int = 0,
     val clubId: String? = null,
-    val organizerId: String? = null
+    val organizerId: String? = null,
+    val clubName: String? = null,
+    val registrationDeadline: String? = null,
 )
+
+data class PaginationDto(
+    val page: Int, val limit: Int, val total: Int,
+    val totalPages: Int, val hasNextPage: Boolean, val hasPreviousPage: Boolean
+)
+
+

@@ -89,18 +89,21 @@ class EventsRepository @Inject constructor(
 
     // Fetches events from Node.js and refreshes the local cache.
     suspend fun refreshEvents() {
-        val response = eventApi.getEvents()
-
-        check(response.success) {
-            "The server returned an unsuccessful response"
-        }
-
-        val entities = response.data.events.map { event ->
-            event.toEntity()
-        }
+        val all = mutableListOf<EventEntity>()
+        var page = 1
+        do {
+            val response = eventApi.getEvents(page = page, limit = 50)
+            check(response.success) {
+                "The server returned an unsuccessful response"
+            }
+            all += response.data.events.map { event ->
+                event.toEntity()
+            }
+            page++
+        } while (response.pagination.hasNextPage)
 
         // Room emits the updated list automatically to the UI.
-        eventDao.replaceEvents(entities)
+        eventDao.replaceEvents(all)
     }
 
     // Performs the initial remote synchronization.

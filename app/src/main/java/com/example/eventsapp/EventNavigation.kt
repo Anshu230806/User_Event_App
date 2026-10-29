@@ -28,6 +28,8 @@ public object FORGOTPASS_ROUTE
 public object HOME_ROUTE
 
 
+@Serializable
+public object EVENT_FILTER_ROUTE
 class EventNavigationActions(private val navController: NavHostController) {
 
     fun navigateToOnboarding() {
@@ -81,4 +83,7 @@ class EventNavigationActions(private val navController: NavHostController) {
             restoreState = true
         }
     }
+
+    fun navigateToEventFilter() { navController.navigate(EVENT_FILTER_ROUTE) }
+
 }

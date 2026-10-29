@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import com.example.eventsapp.feature.auth.RegisterRoute
 import com.example.eventsapp.feature.home.EventRoute
 import androidx.compose.material3.Text
+import com.example.eventsapp.feature.eventFilterScreen.EventFilterRoute
 
 @Composable
 fun EventNavGraph(
@@ -85,11 +86,18 @@ fun EventNavGraph(
 
             },
             onOppurtunitiesClick = {
-
+                 navActions.navigateToEventFilter()
                 },
                 onProfileClick = {
 
                 }
+            )
+        }
+
+        composable<EVENT_FILTER_ROUTE> {
+            EventFilterRoute(
+                onBackClick = { navController.popBackStack() },
+                onEventClick = { eventId -> /* TODO: detail route */ }
             )
         }
 

@@ -14,13 +14,20 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-private val MIGRATION_2_3 = object : Migration(2, 3) {
+//private val MIGRATION_2_3 = object : Migration(2, 3) {
+//    override fun migrate(db: SupportSQLiteDatabase) {
+//        db.execSQL("ALTER TABLE Users ADD COLUMN email TEXT")
+//        db.execSQL("ALTER TABLE Users ADD COLUMN role TEXT")
+//        db.execSQL("ALTER TABLE Users ADD COLUMN fullName TEXT")
+//    }
+//}
+private val MIGRATION_3_4 = object : Migration(3, 4) {
     override fun migrate(db: SupportSQLiteDatabase) {
-        db.execSQL("ALTER TABLE Users ADD COLUMN email TEXT")
-        db.execSQL("ALTER TABLE Users ADD COLUMN role TEXT")
-        db.execSQL("ALTER TABLE Users ADD COLUMN fullName TEXT")
+        db.execSQL("ALTER TABLE events ADD COLUMN clubName TEXT")
+        db.execSQL("ALTER TABLE events ADD COLUMN registrationDeadline INTEGER")
     }
 }
+// .addMigrations(MIGRATION_2_3, MIGRATION_3_4)
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -36,7 +43,7 @@ object DatabaseModule {
             EventDatabase::class.java,
             "events.db"
         )
-            .addMigrations(MIGRATION_2_3)
+            .addMigrations(MIGRATION_3_4)
             .fallbackToDestructiveMigration()
             .build()
     }

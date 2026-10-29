@@ -88,5 +88,7 @@ fun EventDto.toEntity(): EventEntity {
         organiserId = organizerId.orEmpty(),
         categoryId = "",
         registrationLink = null,
+        clubName = clubName,
+        registrationDeadline = parseIsoToMillis(registrationDeadline),
     )
 }

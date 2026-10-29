@@ -37,6 +37,8 @@ data class EventEntity(
     val organiserId: String,
     val categoryId: String,
     val registrationLink: String? = null,
+    val clubName: String? = null,
+    val registrationDeadline: Long? = null,
 )
 
 
