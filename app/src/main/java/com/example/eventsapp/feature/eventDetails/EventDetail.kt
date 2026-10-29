@@ -11,6 +11,8 @@ import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Payments
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -134,6 +136,34 @@ private fun EventDetailScreenPreview() {
             ),
             onBackClick = {},
             onRegisterClick = {}
+        )
+    }
+}
+
+@Composable
+fun EventDetailRoute(
+    eventId: String,
+    onBackClick: () -> Unit,
+    onRegisterClick: (String) -> Unit,
+    viewModel: EventDetailViewModel = androidx.hilt.navigation.compose.hiltViewModel()
+) {
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
+    androidx.compose.runtime.LaunchedEffect(eventId) { viewModel.loadEvent(eventId) }
+    val errorMessage = state.errorMessage
+    val event = state.event
+    when {
+        state.isLoading -> androidx.compose.foundation.layout.Box(
+            Modifier.fillMaxSize(),
+            contentAlignment = androidx.compose.ui.Alignment.Center
+        ) { CircularProgressIndicator() }
+        errorMessage != null -> androidx.compose.foundation.layout.Column(Modifier.fillMaxSize().padding(24.dp)) {
+            Text(errorMessage, color = MaterialTheme.colorScheme.error)
+            TextButton(onClick = onBackClick) { Text("Back") }
+        }
+        event != null -> EventDetailScreen(
+            event = event,
+            onBackClick = onBackClick,
+            onRegisterClick = { onRegisterClick(event.eventId) }
         )
     }
 }

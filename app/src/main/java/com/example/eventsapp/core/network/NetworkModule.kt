@@ -3,6 +3,9 @@ package com.example.eventsapp.core.network
 import com.example.eventsapp.BuildConfig
 import com.example.eventsapp.data.remote.AuthApi
 import com.example.eventsapp.data.remote.EventApi
+import com.example.eventsapp.data.remote.RegistrationApi
+import com.example.eventsapp.data.remote.OpportunityApi
+import com.example.eventsapp.data.remote.ClubApi
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
@@ -15,6 +18,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 import javax.inject.Singleton
+import kotlin.jvm.java
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -88,4 +92,20 @@ object NetworkModule {
     fun provideEventApi(retrofit: Retrofit): EventApi {
         return retrofit.create(EventApi::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideRegistrationApi(retrofit: Retrofit): RegistrationApi =
+        retrofit.create(RegistrationApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideOpportunityApi(retrofit: Retrofit): OpportunityApi =
+        retrofit.create(OpportunityApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideClubApi(retrofit: Retrofit): ClubApi =
+        retrofit.create(ClubApi::class.java)
 }
+

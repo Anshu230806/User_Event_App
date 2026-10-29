@@ -13,8 +13,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface EventDao {
 
-     //Observes all locally stored events.
-     // Room automatically emits a new list whenever the table changes.
+    //Observes all locally stored events.
+    // Room automatically emits a new list whenever the table changes.
     @Query("SELECT * FROM events")
     fun observeEvents(): Flow<List<EventEntity>>
 
@@ -26,6 +26,9 @@ interface EventDao {
     @Query("DELETE FROM events")
     suspend fun deleteAllEvents()
 
+
+    @Query("SELECT * FROM events WHERE eventId = :eventId LIMIT 1")
+    suspend fun getEventById(eventId: String): EventEntity?
 
     @Query("SELECT COUNT(*) FROM events")
     suspend fun getEventCount(): Int

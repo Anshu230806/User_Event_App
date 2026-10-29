@@ -106,6 +106,8 @@ class EventsRepository @Inject constructor(
         eventDao.replaceEvents(all)
     }
 
+    suspend fun getEvent(eventId: String): EventEntity? = eventDao.getEventById(eventId)
+
     // Performs the initial remote synchronization.
     suspend fun initializeEvents() {
         refreshEvents()
