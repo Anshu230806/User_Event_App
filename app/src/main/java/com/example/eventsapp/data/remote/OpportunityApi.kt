@@ -1,5 +1,6 @@
 package com.example.eventsapp.data.remote
 
+import com.example.eventsapp.data.remote.dto.GenericActionResponse
 import com.example.eventsapp.data.remote.dto.OpportunitiesResponseDto
 import com.example.eventsapp.data.remote.dto.OpportunityApplicationRequest
 import retrofit2.http.GET
