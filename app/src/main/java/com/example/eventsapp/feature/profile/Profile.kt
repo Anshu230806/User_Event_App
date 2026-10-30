@@ -8,6 +8,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -16,6 +17,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 private val ProfilePurple = Color(0xFF501783)
 private val ProfileLightPurple = Color(0xFFF2EAF9)
@@ -28,8 +31,43 @@ fun ProfileScreen(
     onSavedEvents: () -> Unit = {},
     onSettings: () -> Unit = {},
     onHelp: () -> Unit = {},
+    onLogout: () -> Unit = {},
+    viewModel: ProfileViewModel = hiltViewModel()
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    ProfileContent(
+        uiState = uiState,
+        onEditProfile = onEditProfile,
+        onMyEvents = onMyEvents,
+        onSavedEvents = onSavedEvents,
+        onSettings = onSettings,
+        onHelp = onHelp,
+        onLogout = {
+            viewModel.signOut(onLogout)
+        }
+    )
+}
+
+@Composable
+fun ProfileContent(
+    uiState: ProfileUiState,
+    onEditProfile: () -> Unit = {},
+    onMyEvents: () -> Unit = {},
+    onSavedEvents: () -> Unit = {},
+    onSettings: () -> Unit = {},
+    onHelp: () -> Unit = {},
     onLogout: () -> Unit = {}
 ) {
+    val initial = when {
+        uiState.name.isNotBlank() -> uiState.name.trim().first().uppercase()
+        uiState.email.isNotBlank() -> uiState.email.trim().first().uppercase()
+        else -> "U"
+    }
+    val displayName = uiState.name.ifBlank { "User" }
+    val displayEmail = uiState.email.ifBlank { "No email provided" }
+    val displayRole = uiState.role.ifBlank { "Student" }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -69,7 +107,7 @@ fun ProfileScreen(
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = "A",
+                        text = initial,
                         fontSize = 42.sp,
                         fontWeight = FontWeight.Bold,
                         color = ProfilePurple
@@ -79,7 +117,7 @@ fun ProfileScreen(
                 Spacer(Modifier.height(14.dp))
 
                 Text(
-                    text = "Ruchi Sharma",
+                    text = displayName,
                     fontSize = 21.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color(0xFF29212F)
@@ -88,7 +126,7 @@ fun ProfileScreen(
                 Spacer(Modifier.height(5.dp))
 
                 Text(
-                    text = "ruchi@example.com",
+                    text = displayEmail,
                     fontSize = 14.sp,
                     color = Color.Gray
                 )
@@ -100,7 +138,7 @@ fun ProfileScreen(
                     shape = RoundedCornerShape(20.dp)
                 ) {
                     Text(
-                        text = "Student",
+                        text = displayRole,
                         modifier = Modifier.padding(
                             horizontal = 18.dp,
                             vertical = 7.dp
@@ -142,13 +180,13 @@ fun ProfileScreen(
         ) {
             ActivityCard(
                 title = "Events Joined",
-                value = "08",
+                value = "0",
                 modifier = Modifier.weight(1f)
             )
 
             ActivityCard(
                 title = "Saved Events",
-                value = "12",
+                value = "0",
                 modifier = Modifier.weight(1f)
             )
         }
@@ -322,6 +360,12 @@ private fun ProfileMenuItem(
 @Composable
 fun ProfileScreenPreview() {
     MaterialTheme {
-        ProfileScreen()
+        ProfileContent(
+            uiState = ProfileUiState(
+                name = "Ruchi Sharma",
+                email = "ruchi@example.com",
+                role = "Student"
+            )
+        )
     }
 }

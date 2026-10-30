@@ -29,7 +29,11 @@ import java.util.Locale
 fun EventDetailScreen(
     event: EventEntity,
     onBackClick: () -> Unit,
-    onRegisterClick: (String?) -> Unit = {}
+    onRegisterClick: () -> Unit = {},
+    isRegistering: Boolean = false,
+    isRegistered: Boolean = false,
+    registrationMessage: String? = null,
+    registrationError: String? = null
 ) {
     Scaffold(
         topBar = {
@@ -41,14 +45,50 @@ fun EventDetailScreen(
                     }
                 }
             )
-        },
-        bottomBar = {
+        },bottomBar = {
             Surface(tonalElevation = 3.dp) {
-                Button(
-                    onClick = { onRegisterClick(event.registrationLink) },
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp),
-                    shape = RoundedCornerShape(12.dp)
-                ) { Text("Register for event") }
+                Column(
+                    modifier = Modifier.padding(16.dp)
+                ) {
+
+                    registrationMessage?.let {
+                        Text(
+                            text = it,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
+
+                    registrationError?.let {
+                        Text(
+                            text = it,
+                            color = MaterialTheme.colorScheme.error
+                        )
+                    }
+
+                    Button(
+                        onClick = onRegisterClick,
+                        enabled = !isRegistering && !isRegistered,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp),
+                        shape = RoundedCornerShape(12.dp)
+                    ) {
+                        if (isRegistering) {
+                            CircularProgressIndicator(
+                                modifier = Modifier.size(22.dp),
+                                color = MaterialTheme.colorScheme.onPrimary
+                            )
+                        } else {
+                            Text(
+                                if (isRegistered) {
+                                    "Registered"
+                                } else {
+                                    "Register for event"
+                                }
+                            )
+                        }
+                    }
+                }
             }
         }
     ) { padding ->
@@ -163,7 +203,11 @@ fun EventDetailRoute(
         event != null -> EventDetailScreen(
             event = event,
             onBackClick = onBackClick,
-            onRegisterClick = { onRegisterClick(event.eventId) }
+            onRegisterClick = viewModel::registerForEvent,
+            isRegistering = state.isRegistering,
+            isRegistered = state.isRegistered,
+            registrationMessage = state.registrationMessage,
+            registrationError = state.registrationError
         )
     }
 }

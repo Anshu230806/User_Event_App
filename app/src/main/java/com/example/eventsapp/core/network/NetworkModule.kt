@@ -95,9 +95,11 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRegistrationApi(retrofit: Retrofit): RegistrationApi =
-        retrofit.create(RegistrationApi::class.java)
-
+    fun provideRegistrationApi(
+        retrofit: Retrofit
+    ): RegistrationApi {
+        return retrofit.create(RegistrationApi::class.java)
+    }
     @Provides
     @Singleton
     fun provideOpportunityApi(retrofit: Retrofit): OpportunityApi =

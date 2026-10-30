@@ -19,6 +19,9 @@ interface UserDao {
     @Query("SELECT * FROM Users WHERE userId = :id")
     suspend fun getProfile(id: String): UserEntity?
 
+    @Query("SELECT * FROM Users LIMIT 1")
+    suspend fun getCurrentUser(): UserEntity?
+
     // Saves or replaces the cached application-user record.
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertProfile(user: UserEntity)
